@@ -10,7 +10,348 @@
 
 */
 
+img, 
+svg {
+  display: block;
+}
+
+button {
+  cursor: pointer;
+}
+
 .page {
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  font-family: var(--main-font-family), sans-serif;
+  font-weight: var(--article-text-font-weight);
+  background-image: var(--body-gradient);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.page__block {
+  inline-size: var(--block-width);
+  border: 2px solid #000000;
+  background-color: white;
+  margin-inline: auto;
+}
+
+.header {
+  margin-block: 98px;
+  padding-block: clamp(7.500rem, calc(7.280rem + 0.939vw), 8.125rem);
+  font-family: var(--accent-font-family), fantasy;
+  text-align: center;
+}
+
+.header__logo {
+  font-size: clamp(2.875rem, calc(2.536rem + 1.696vw), 4.063rem);
+  margin-block-end: 20px;
+}
+
+.header__title {
+  font-size: clamp(0.875rem, calc(0.677rem + 0.845vw), 1.438rem);
+  text-transform: uppercase;
+}
+
+.main {
+  font-size: 18px;
+}
+
+.article {
+  padding-block-end: 24px;
+}
+
+li:not(:last-child) .article {
+  margin-block-end: 50px;
+}
+
+.article__title {
+  font-weight: var(--article-title-font-weight);
+  padding-inline: 10px;
+  padding-block: 4px;
+  border-bottom: 2px solid #000000;
+}
+
+.image__container {
+  position: relative;
+}
+
+.article__image {
+  inline-size: 100%;
+}
+
+.brightness {
+  filter: brightness(300%);
+}
+
+.hue-rotate {
+  filter: hue-rotate(180deg);
+}
+
+.saturate {
+  filter: saturate(300%);
+}
+
+.invert {
+  filter: invert(1);
+}
+
+.sepia {
+  filter: sepia(80%);
+}
+
+.blur {
+  filter: blur(0.4rem);
+}
+
+.multi-filter {
+  filter: hue-rotate(180deg) saturate(300%) invert(1);
+}
+
+.image__label {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 1;
+  font-family: var(--accent-font-family);
+  font-size: 14px;
+  opacity: 50%;
+  mix-blend-mode: hard-light;
+  text-shadow: 
+    -1px 0 var(--main-stroke-color), 
+    0 1px var(--main-stroke-color), 
+    1px 0 var(--main-stroke-color), 
+    0 -1px var(--main-stroke-color);
+}
+
+@supports(-webkit-text-stroke: 1px var(--main-stroke-color)) {
+  .image__label {
+    -webkit-text-stroke: 1px var(--main-stroke-color);
+    text-shadow: none;
+  }
+} 
+
+.article__text {
+  display: grid;
+  gap: 25px;
+  border-top: 2px solid #000000;
+  padding-inline: 25px;
+  padding-block: 25px;
+}
+
+.article__buttons {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 6px;
+  padding-inline-end: 25px;
+}
+
+.card__icon-button {
+  padding: 0;
+  border: 2px solid transparent;
+  transition: 0.3s ease;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border-color: #000000; 
+}
+
+.like-icon.is-liked {
+  transform-origin: center;
+}
+
+.like-icon.is-liked .heart {
+  animation: heart-scaling 0.3s 0.1s 1 ease-in;
+}
+
+.contour {
+  transition: fill 0.1s linear;
+}
+
+.like-icon.is-liked .contour {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s linear 0.06s;
+}
+
+.main-body {
+  transition: fill 0.3s linear;
+}
+
+.like-icon:hover .main-body {
+  fill: var(--contour-color);
+  transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon:active .main-body {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon.is-liked .main-body {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s linear 0.05s;
+}
+
+.core {
+  transition: fill 0.3s linear 0.03s;
+}
+
+.like-icon:hover .core {
+  fill: var(--contour-color);
+  transition: fill 0.3s linear;
+}
+
+.like-icon:active .core {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s linear;
+}
+
+.like-icon.is-liked .core {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s linear;
+}
+
+.sparks {
+  opacity: 0;
+}
+
+.like-icon.is-liked .sparks {
+  animation: sparks-animation 0.3s 0.3s 1 ease-in;
+}
+
+.card__like-button {
+  border: 2px solid #000;
+  padding-inline: 35px;
+  padding-block-start: 8px;
+  padding-block-end: 6px;
+}
+
+.button__text {
+  font-family: var(--accent-font-family), fantasy;
+  font-size: 14px;
+  color: var(--white-color);
+  mix-blend-mode: difference;
+}
+
+.button-action {
+  position: relative;
+  z-index: 0;
+  transition: 0.3s ease;
+  background-color: var(--white-color);
+}
+
+.button-action:focus {
+  outline: none;
+}
+
+.button-action:focus-visible {
+  box-shadow: 2px 2px 0 #000000;
+}
+
+.button-action::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-in-out;
+  background-color: #000000;
+}
+
+.button-action:hover::before {
+  transform: scaleX(1);
+}
+
+.save-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  inline-size: clamp(19.125rem, calc(18.607rem + 2.589vw), 20.938rem);
+  border: 2px solid #000;
+  padding-block-start: 17px;
+  padding-block-end: 13px;
+  margin-inline: auto;
+  margin-block-start: 50px;
+  margin-block-end: 100px;
+}
+
+.save-button-floppy {
+  position: relative;
+  z-index: 1;
+  mix-blend-mode: difference;
+  color: var(--white-color);
+  fill: currentColor;
+}
+
+.save-button-text {
+  white-space: nowrap;
+}
+
+.dialog-floppy {
+  inline-size: clamp(21.313rem, calc(21.048rem + 1.127vw), 22.063rem);
+  padding-inline: 30px;
+  padding-block: 30px;
+  border: 2px solid #000000;
+}
+
+.dialog-floppy[open] {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: 3fr 2fr;
+  gap: 30px 20px;
+}
+
+.dialog-floppy::backdrop {
+  background-color: rgb(0 0 0 / 0.75);
+}
+
+.dialog-icon {
+  align-self: center;
+}
+
+.dialog-title {
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.dialog-button {
+  inline-size: 100%;
+  grid-column: 1/-1;
+}
+
+@media (width <= 375px) {
+  .page__block {
+    inline-size: 100%;
+  }
+
+  .header {
+    margin-block: 102px;
+  }
+
+  .save-button {
+    flex-direction: column;
+  }
+
+  .save-button svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .dialog-floppy {
+    padding-inline: 40px;
+  }
+
+  .dialog-title {
+    word-spacing: -0.5em;
+  }
 }
